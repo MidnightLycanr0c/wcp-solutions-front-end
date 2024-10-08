@@ -1,1 +1,3 @@
-# wcp-solutions-front-end
+# WCP Solutions | Front End
+## Contributors
+- [Eugene Moshchyn](https://github.com/EvilCheetah)
