@@ -4,3 +4,4 @@
 - [Nick Minor](https://github.com/MidnightLycanr0c)
 - [Wanh Khang](https://github.com/WanhKhang)
 - [Anish Mishra](https://github.com/VocalVisage)
+- [Khush Bakhat](https://github.com/JhengaOnRoll)
