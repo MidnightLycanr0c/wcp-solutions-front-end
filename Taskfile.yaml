@@ -1,0 +1,18 @@
+version: '3'
+
+
+vars:
+    PACKAGE_MANAGER: pnpm
+
+
+tasks:
+    dependencies:
+        cmds:
+            - |
+              {{ .PACKAGE_MANAGER }} install
+
+    run-dev:
+        cmds:
+            - task: dependencies
+            - |
+              {{ .PACKAGE_MANAGER }} run dev
