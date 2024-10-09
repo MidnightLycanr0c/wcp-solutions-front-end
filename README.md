@@ -1,11 +1,13 @@
 # WCP Solutions | Front End
 ## Contributors
+- [Anish Mishra](https://github.com/VocalVisage)
+- [Austin Melendez](https://github.com/austin-mel)
+- [Christopher Romero](https://github.com/cromero3)
 - [Eugene Moshchyn](https://github.com/EvilCheetah)
+- [Gloria Nikitchuk](https://github.com/glorikaan)
+- [Khush Bakhat](https://github.com/JhengaOnRoll)
 - [Nick Minor](https://github.com/MidnightLycanr0c)
 - [Wanh Khang](https://github.com/WanhKhang)
-- [Anish Mishra](https://github.com/VocalVisage)
-- [Khush Bakhat](https://github.com/JhengaOnRoll)
-- [Austin Melendez](https://github.com/austin-mel)
 
 ## Necessary Tools
 - [Taskfile](https://taskfile.dev/installation/) (Optional) - used to automate the commands.
