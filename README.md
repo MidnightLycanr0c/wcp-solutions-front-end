@@ -5,3 +5,4 @@
 - [Wanh Khang](https://github.com/WanhKhang)
 - [Anish Mishra](https://github.com/VocalVisage)
 - [Khush Bakhat](https://github.com/JhengaOnRoll)
+- [Austin Melendez](https://github.com/austin-mel)
