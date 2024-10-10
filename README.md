@@ -1,4 +1,4 @@
-# WCP Solutions | Front End
+# WCP Solutions | Front End 
 ## Contributors
 - [Anish Mishra](https://github.com/VocalVisage)
 - [Austin Melendez](https://github.com/austin-mel)
@@ -25,3 +25,7 @@
 
 You can also automate the dependency installation and application startup by using the provided [Taskfile.yaml](./Taskfile.yaml). Simply run the following command to execute everything at once:  
 `task run-dev`
+
+
+***
+### Developed as part of a project for the CSUS CSC190 class.
