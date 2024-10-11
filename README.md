@@ -28,4 +28,4 @@ You can also automate the dependency installation and application startup by usi
 
 
 ***
-### Developed as part of a project for the CSUS CSC190 class.
+### Developed as part of a project for the [California State University — Sacramento](https://www.csus.edu/) [CSC 190](https://catalog.csus.edu/ribbit/index.cgi?page=getcourse.rjs&code=CSC%20190) class.
