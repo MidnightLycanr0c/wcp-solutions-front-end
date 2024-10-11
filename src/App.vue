@@ -4,9 +4,10 @@
 </script>
 
 <template>
-    <Navigation />
-    <main class="flex-grow flex flex-col items-center justify-center p-4">
-        <Login />
-    </main>
+    <Navigation>
+        <main class="flex-grow flex flex-col items-center justify-center p-4">
+            <Login />
+        </main>
+    </Navigation>
 </template>
 
