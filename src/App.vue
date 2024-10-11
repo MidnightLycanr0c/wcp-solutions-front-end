@@ -1,4 +1,12 @@
+<script setup lang="ts">
+    import Navigation from './components/Navigation.vue';
+    import Login from './components/Login.vue';
+</script>
+
 <template>
-    <h1 class="text-3xl font-bold underline">Vite + Vue</h1>
+    <Navigation />
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <Login />
+    </main>
 </template>
 
