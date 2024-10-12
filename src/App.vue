@@ -1,6 +1,8 @@
 <script setup lang="ts">
-    import Navigation from './components/Navigation.vue';
-    import Login from './components/Login.vue';
+
+import Navigation from './components/Navigation.vue';
+import Login from './components/Login.vue';
+
 </script>
 
 <template>
