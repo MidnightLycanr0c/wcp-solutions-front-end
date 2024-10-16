@@ -1,5 +1,5 @@
 <template>
-  <section class="account-page max-w-6xl mx-auto p-10 mt-12">
+  <section class="font-sans max-w-6xl mx-auto p-10 mt-12">
     <div class="bg-white rounded-lg shadow-lg p-10">
       <!-- Header -->
       <div class="flex items-center mb-8">
