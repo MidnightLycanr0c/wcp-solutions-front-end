@@ -1,13 +1,14 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import { Account, Login } from '@/components';
+import { Account } from '@/components';
+import { LoginView } from '@/views';
 
 
 const routes = [
     {
         path: '/',
         name: 'Login',
-        component: Login,
+        component: LoginView,
     },
     {
         path:'/account',
@@ -17,7 +18,7 @@ const routes = [
 ];
 
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes,
 });
