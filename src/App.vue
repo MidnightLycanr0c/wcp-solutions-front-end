@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { Account, Navigation } from '@/components';
+import { Navigation } from '@/components';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
     <Navigation>
-        <main class="flex-grow flex flex-col items-center justify-center p-4">
-            <Account />
-        </main>
+        <RouterView />
     </Navigation>
 </template>
