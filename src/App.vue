@@ -1,9 +1,5 @@
 <script setup lang="ts">
-
-import Navigation from './components/Navigation.vue';
-import Login from './components/Login.vue';
-import Account from './components/Account/Account.vue';
-
+import { Account, Navigation } from '@/components';
 </script>
 
 <template>
@@ -13,4 +9,3 @@ import Account from './components/Account/Account.vue';
         </main>
     </Navigation>
 </template>
-
