@@ -1,6 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import { AccountView, LoginView } from '@/views';
+import {
+    AccountView,
+    DashboardView,
+    LoginView
+} from '@/views';
 
 
 const routes = [
@@ -8,6 +12,11 @@ const routes = [
         path: '/',
         name: 'Login',
         component: LoginView,
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: DashboardView,
     },
     {
         path:'/account',
