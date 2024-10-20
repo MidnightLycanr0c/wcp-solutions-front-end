@@ -3,16 +3,16 @@
         <div class="w-auto h-full flex items-center justify-center text-white">
             <a class="mr-3 flex-none w-[2.0625rem] overflow-hidden md:w-auto" href="/">
                 <span class="sr-only">WCP Solutions Home Page</span>
-                <img  class="w-auto h-5" src="../assets/wcp-logo.svg" alt="WCP Solutions Logo" >
+                <img class="w-auto h-7" src="../assets/wcp_web_logo.svg" alt="WCP Solutions Logo" >
             </a>
         </div>
     </header>
+
     <slot></slot>
+
     <footer class="w-full p-4 flex justify-start items-center bg-black">
-        <div class="w-auto h-full flex items-center justify-center text-white">
-            <a class="mr-3 flex-none w-[2.0625rem] overflow-hidden md:w-auto" href="/">
-                <span class="sr-only">WCP Solutions Home Page</span>
-            </a>
-        </div>    
+        <div class="w-auto h-full flex text-white flex-col">
+            <span class="text-xs mt-0">© 2024 WCP Solutions, All Rights Reserved.</span>
+        </div>
     </footer>
 </template>
