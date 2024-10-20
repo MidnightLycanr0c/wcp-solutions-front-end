@@ -1,7 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import { Account } from '@/components';
-import { LoginView } from '@/views';
+import { AccountView, LoginView } from '@/views';
 
 
 const routes = [
@@ -13,7 +12,7 @@ const routes = [
     {
         path:'/account',
         name: 'Account',
-        component: Account,
+        component: AccountView,
     },
 ];
 
