@@ -4,18 +4,4 @@
         { "path": "./tsconfig.app.json" },
         { "path": "./tsconfig.node.json" }
     ],
-    "compilerOptions": {
-        "baseUrl": "./src",
-        "paths": {
-            "@/":             ["src/index"],
-            "@/assets":       ["src/assets/index"],
-            "@/components":   ["src/components/index"],
-            "@/router":       ["src/router/index"],
-
-            "@/*":            ["src/*"],
-            "@/assets/*":     ["src/assets/*"],
-            "@/components/*": ["src/components/*"],
-            "@/router/*":     ["src/router/*"],
-        }
-    }
 }
