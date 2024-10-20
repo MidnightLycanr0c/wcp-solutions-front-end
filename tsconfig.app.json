@@ -26,11 +26,13 @@
         "@/assets":       ["src/assets/index"],
         "@/components":   ["src/components/index"],
         "@/router":       ["src/router/index"],
+        "@/views":        ["src/views/index"],
 
         "@/*":            ["src/*"],
         "@/assets/*":     ["src/assets/*"],
         "@/components/*": ["src/components/*"],
         "@/router/*":     ["src/router/*"],
+        "@/views/*":      ["src/views/*"],
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
