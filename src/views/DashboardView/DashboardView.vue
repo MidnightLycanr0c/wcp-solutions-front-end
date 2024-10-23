@@ -44,12 +44,34 @@ const showAcountManagerColumn = computed(() => {
 
 <template>
     <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
-        <form class="flex search-form">
+        <div class = "flex items-center justify-between">
+        <form class="flex search-form w-3/4">
             <input type="text" placeholder="Search customers by name or keyword" name="search" class="flex-1 p-2 border border-gray-300 rounded-l-md"/>
             <button type="submit" class="bg-black text-white border border-black px-4 py-2 rounded-r-md">
                 Search
             </button>
         </form>
+        
+        <!-- Inserting user account icon using Heroicons-->
+        <RouterLink to="/account" class="ml-4">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-10 h-10 text-black"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5.121 18.364A9 9 0 1112 21a9 9 0 01-6.879-2.636zM15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+            </svg>
+        </RouterLink>
+
+        </div>
+
     </div>
 
     <div class="flex w-full h-screen mt-5">
