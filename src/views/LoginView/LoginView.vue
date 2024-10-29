@@ -1,6 +1,9 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const email         = ref('');
 const password      = ref('');
@@ -22,6 +25,9 @@ async function handle_login()
         if (email.value === 'test@gmail.com' && password.value === 'password')
         {
             console.log('Successful Login!');
+
+            // TEMPORARY FUNCTIONALITY TO CHANGE PAGES ON "SUCCESSFUL" LOGIN
+            router.push('/dashboard');
         }
         else
         {
