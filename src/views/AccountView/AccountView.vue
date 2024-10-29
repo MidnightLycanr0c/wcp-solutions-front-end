@@ -21,20 +21,47 @@ const account = ref<Account>({
 
 const full_name = computed(() => `${account.value.name.first} ${account.value.name.last}`)
 
-const router = useRouter();
+// TODO: fetch user role from above to determine if they are an admin!
+const userRole = ref<string>('admin'); //remove admin string to test regular user view
 
-const closeAccountView = () => {
-    router.push('/dashboard');
-};
+// Determine if the acount should be marked as an "admin"
+const showAdminBadge = computed(() => {
+    return userRole.value === 'admin';
+})
 </script>
 
 
 <template>
     <section class="font-sans max-w-6xl mx-auto p-10 mt-12">
-        <div class="bg-white rounded-lg shadow-lg p-10">
+        <div class="bg-white rounded-lg shadow-lg">
+
+            <!-- Admin Badge -->
+            <div v-if="showAdminBadge" class="flex items-center">
+                <div class="bg-red-800 p-5 w-full">
+                    <h3 class="text-2xl font-bold text-gray-900 flex items-center justify-center">
+                        Administrator
+                    </h3>
+                </div>
+            </div>
+
+            <!--Close Profile Button-->
+            <RouterLink to="/dashboard" class="ml-4 text-gray-500 hover:text-black flex items-center justify-end">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor" 
+                    class="w-10 h-10">
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        stroke-width="2" d="M6 18L18 6M6 6l12 12" 
+                    />
+                </svg>
+            </RouterLink>
             
             <!-- Header -->
-            <div class="flex items-center mb-8">
+            <div class="flex items-center mb-8 flex items-center justify-center">
                 <div class="flex-shrink-0 w-28 h-28 bg-gray-300 rounded-full flex items-center justify-center">
                     <span class="text-4xl font-bold text-gray-700">TU</span> 
                 </div>
@@ -46,15 +73,8 @@ const closeAccountView = () => {
                 </div>
             </div>
 
-             <!--Close Button-->
-             <button @click="closeAccountView" class="text-gray-500 hover:text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
             <!-- Account Info -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 p-10">
                 <!-- Full Name -->
                 <div class="flex items-center bg-gray-100 p-6 rounded-lg">
                     <UserIcon class="h-6 w-6 text-gray-500 mr-4" />
