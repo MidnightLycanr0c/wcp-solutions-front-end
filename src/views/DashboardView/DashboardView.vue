@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-
+import { ref, computed, onMounted } from 'vue';
 import { GoogleMap } from '@/components';
+import FilterView from './FilterView.vue';
 
-// MOCKUP
+
+const items = ref<SearchResult[]>([]);
+const userRole = ref<string>('salesperson'); // change this to 'admin' or 'salesperson' to test
+
+// styling
+const CHECK_MARK = '\u2714'; // Unicode for ✔
+const CROSS_MARK = '\u2716'; // Unicode for ✖
+
 interface SearchResult {
     name: string;
     status: number,
@@ -15,39 +22,43 @@ interface SearchResult {
     accountManager?: string; //  optional
 }
 
-const userRole = ref<string>('admin'); // change this to 'admin' or 'salesperson' to test
-
-const searchResults = ref<SearchResult[]>([
-    {
-        name: 'John Doe Inc',
-        status: 1,
-        address: '123 Elm St, Springfield',
-        distance: '5 miles',
-        phoneNumber: '+1(234)567-8901',
-        email: 'johndoe@example.com',
-        territory_number: 5,
-        accountManager: 'Alice Johnson',
-    },
-    {
-        name: 'Juicy Fruit Co.',
-        status: 0,
-        address: '456 Oak St, Springfield',
-        distance: '3 miles',
-        phoneNumber: '+1(345)678-9012',
-        email: 'janesmith@example.com',
-        territory_number: 2,
-        accountManager: 'Bob Brown',
-    },
-]);
+// mock API call
+onMounted(async () => {
+    try {
+        const response = await fetch('src/views/DashboardView/search_result_mockup.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        items.value = await response.json();
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+        items.value = [];
+    }
+});
 
 // determine if the accountManager column should be displayed
 const showAcountManagerColumn = computed(() => {
     return userRole.value === 'manager' || userRole.value === 'admin';
 });
 
-const CHECK_MARK = '\u2714'; // Unicode for ✔
-const CROSS_MARK = '\u2716'; // Unicode for ✖
+//  sorts result by closest distance
+const parseDistance = (distance: string): number => {
+    const match = distance.match(/(\d+)\s*(miles?|km)/);
+    if (match) {
+        const value = parseFloat(match[1]);
+        return value
+    }
+    return Infinity; 
+};
 
+// limits amounts of results to be displayed
+// TODO: len(result) -> limit, add "see more" button
+// TODO: fix styling break when there are more than 2 results
+const limitedItems = computed(() => {
+    return items.value
+        .sort((a, b) => parseDistance(a.distance) - parseDistance(b.distance)) // Sort by distance
+        .slice(0, 2); // Limit to 2 results
+});
 
 </script>
 
@@ -108,8 +119,7 @@ const CROSS_MARK = '\u2716'; // Unicode for ✖
 
     <div class="flex w-full h-screen mt-5">
         <div class="bg-white rounded-lg shadow-lg p-5 w-1/4">
-            <!-- Filter Placeholder -->
-            
+            <FilterView/>
         </div>
 
         <div class="flex-1 p-5">
@@ -129,7 +139,7 @@ const CROSS_MARK = '\u2716'; // Unicode for ✖
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(result, index) in searchResults" :key="index">
+                        <tr v-for="(result, index) in limitedItems" :key="index">
                             <td class="px-4 py-2 border-b border-gray-300">
                                 <span v-if="result.status === 1" class="inline-block w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
                                     {{ CHECK_MARK }}
