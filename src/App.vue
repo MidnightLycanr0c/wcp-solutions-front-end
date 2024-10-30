@@ -2,7 +2,7 @@
 
 import Navigation from './components/Navigation.vue';
 import Login from './components/Login.vue';
-
+import Account from './components/Account.vue';
 </script>
 
 <template>
