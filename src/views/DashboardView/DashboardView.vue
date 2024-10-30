@@ -6,6 +6,7 @@ import { GoogleMap } from '@/components';
 // MOCKUP
 interface SearchResult {
     name: string;
+    status: number,
     address: string;
     distance: string;
     phoneNumber: string;
@@ -18,7 +19,8 @@ const userRole = ref<string>('admin'); // change this to 'admin' or 'salesperson
 
 const searchResults = ref<SearchResult[]>([
     {
-        name: 'John Doe',
+        name: 'John Doe Inc',
+        status: 1,
         address: '123 Elm St, Springfield',
         distance: '5 miles',
         phoneNumber: '+1(234)567-8901',
@@ -27,7 +29,8 @@ const searchResults = ref<SearchResult[]>([
         accountManager: 'Alice Johnson',
     },
     {
-        name: 'Jane Smith',
+        name: 'Juicy Fruit Co.',
+        status: 0,
         address: '456 Oak St, Springfield',
         distance: '3 miles',
         phoneNumber: '+1(345)678-9012',
@@ -41,6 +44,10 @@ const searchResults = ref<SearchResult[]>([
 const showAcountManagerColumn = computed(() => {
     return userRole.value === 'manager' || userRole.value === 'admin';
 });
+
+const CHECK_MARK = '\u2714'; // Unicode for ✔
+const CROSS_MARK = '\u2716'; // Unicode for ✖
+
 
 </script>
 
@@ -111,7 +118,8 @@ const showAcountManagerColumn = computed(() => {
                 <table class="min-w-full border-b border-gray-300">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 text-left">Name</th>
+                            <th class="px-4 py-2 text-left">Active</th>
+                            <th class="px-4 py-2 text-left">Company Name</th>
                             <th class="px-4 py-2 text-left">Address</th>
                             <th class="px-4 py-2 text-left">Distance</th>
                             <th class="px-4 py-2 text-left">Phone Number</th>
@@ -122,6 +130,14 @@ const showAcountManagerColumn = computed(() => {
                     </thead>
                     <tbody>
                         <tr v-for="(result, index) in searchResults" :key="index">
+                            <td class="px-4 py-2 border-b border-gray-300">
+                                <span v-if="result.status === 1" class="inline-block w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
+                                    {{ CHECK_MARK }}
+                                </span>
+                                <span v-else class="inline-block w-6 h-6 bg-red-500 rounded-full text-white flex items-center justify-center">
+                                    {{ CROSS_MARK }}
+                                </span>
+                            </td>
                             <td class="px-4 py-2 border-b border-gray-300">{{ result.name }}</td>
                             <td class="px-4 py-2 border-b border-gray-300">{{ result.address }}</td>
                             <td class="px-4 py-2 border-b border-gray-300">{{ result.distance }}</td>
