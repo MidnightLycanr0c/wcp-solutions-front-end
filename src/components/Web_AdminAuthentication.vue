@@ -8,7 +8,7 @@
         </h2>
         <form class="space-y-4">
             <h3 class="text-red-500 font-normal text-center mb-3">
-                We could not authenticate your account.
+                We could not test your account.
                 <br>
                 Please contact a WCP Solutions support representative for assistance.
             </h3>
