@@ -2,7 +2,7 @@
 ## Contributors
 - [Anish Mishra](https://github.com/VocalVisage)
 - [Austin Melendez](https://github.com/austin-mel)
-- [Chris Romero](https://github.com/cromero3)
+- [Christopher Romero](https://github.com/cromero3)
 - [Eugene Moshchyn](https://github.com/EvilCheetah)
 - [Gloria Nikitchuk](https://github.com/glorikaan)
 - [Khush Bakhat](https://github.com/JhengaOnRoll)

@@ -5,14 +5,15 @@ vars:
     PACKAGE_MANAGER: pnpm
 
 
+dotenv: ["./environment/.front-end.env"]
+
+
 tasks:
     dependencies:
         cmds:
-            - |
-              {{ .PACKAGE_MANAGER }} install
+            - "{{ .PACKAGE_MANAGER }} install"
 
-    run-dev:
+    run:
+        deps: [dependencies]
         cmds:
-            - task: dependencies
-            - |
-              {{ .PACKAGE_MANAGER }} run dev
+            - "{{ .PACKAGE_MANAGER }} run dev"
