@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+import { GoogleMap } from '@/components';
+
 // MOCKUP
 interface SearchResult {
     name: string;
@@ -134,6 +136,7 @@ const showAcountManagerColumn = computed(() => {
 
             <div class="bg-white rounded-lg shadow-lg p-5">
                 <h2 class="font-bold mb-2">Map</h2>
+                <GoogleMap />
             </div>
         </div>
     </div>
