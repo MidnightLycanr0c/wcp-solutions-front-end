@@ -5,7 +5,10 @@ import {
     DashboardView,
     LoginView,
     NotFoundView,
+    ClientDetails,
+
 } from '@/views';
+import { defineComponent } from 'vue';
 
 
 const routes = [
@@ -31,6 +34,12 @@ const routes = [
         path:     '/:pathMatch(.*)*',
         name:     'Not Found',
         component: NotFoundView
+    },
+    {
+        path:      '/clientdetails',
+        name:      'Client Details',
+        component: ClientDetails,
+        meta: { title: 'Client Details'}
     }
 ];
 
