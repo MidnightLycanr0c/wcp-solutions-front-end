@@ -14,5 +14,13 @@ export default defineConfig({
             '@/router':     path.resolve(__dirname, 'src/router'),
             '@/views':      path.resolve(__dirname, 'src/views'),
         }
+    },
+    server: {
+        proxy: {
+            '/api': {
+                target: process.env.VITE_API_URI,
+                changeOrigin: true,
+            }
+        }
     }
 })

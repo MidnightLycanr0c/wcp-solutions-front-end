@@ -1,0 +1,172 @@
+[
+    {
+        "name": "John Doe Inc",
+        "status": 1,
+        "address": "123 Elm St, Springfield",
+        "distance": "5 miles",
+        "phoneNumber": "+1(234)567-8901",
+        "email": "johndoe@example.com",
+        "territory_number": 5,
+        "accountManager": "Alice Johnson"
+    },
+    {
+        "name": "Juicy Fruit Co.",
+        "status": 0,
+        "address": "456 Oak St, Springfield",
+        "distance": "3 miles",
+        "phoneNumber": "+1(345)678-9012",
+        "email": "janesmith@example.com",
+        "territory_number": 2,
+        "accountManager": "Bob Brown"
+    },
+    {
+        "name": "Tech Innovations LLC",
+        "status": 1,
+        "address": "789 Maple Ave, Springfield",
+        "distance": "1.5 miles",
+        "phoneNumber": "+1(456)789-0123",
+        "email": "contact@techinnovations.com",
+        "territory_number": 3,
+        "accountManager": "Clara Smith"
+    },
+    {
+        "name": "Green Thumb Gardening",
+        "status": 0,
+        "address": "321 Pine St, Springfield",
+        "distance": "2 miles",
+        "phoneNumber": "+1(567)890-1234",
+        "email": "info@greenthumb.com",
+        "territory_number": 1,
+        "accountManager": "David White"
+    },
+    {
+        "name": "Gourmet Bistro",
+        "status": 1,
+        "address": "654 Cedar St, Springfield",
+        "distance": "4 miles",
+        "phoneNumber": "+1(678)901-2345",
+        "email": "hello@gourmetbistro.com",
+        "territory_number": 4,
+        "accountManager": "Eva Green"
+    },
+    {
+        "name": "Fitness First Gym",
+        "status": 1,
+        "address": "987 Birch St, Springfield",
+        "distance": "2.5 miles",
+        "phoneNumber": "+1(789)012-3456",
+        "email": "info@fitnessfirst.com",
+        "territory_number": 6,
+        "accountManager": "Frank Wright"
+    },
+    {
+        "name": "Pet Paradise",
+        "status": 0,
+        "address": "135 Walnut St, Springfield",
+        "distance": "6 miles",
+        "phoneNumber": "+1(890)123-4567",
+        "email": "contact@petparadise.com",
+        "territory_number": 5,
+        "accountManager": "Grace Lee"
+    },
+    {
+        "name": "Quick Tech Solutions",
+        "status": 1,
+        "address": "246 Elm St, Springfield",
+        "distance": "3.5 miles",
+        "phoneNumber": "+1(901)234-5678",
+        "email": "support@quicktech.com",
+        "territory_number": 7,
+        "accountManager": "Henry Adams"
+    },
+    {
+        "name": "Fashion Forward Boutique",
+        "status": 1,
+        "address": "357 Maple St, Springfield",
+        "distance": "4.5 miles",
+        "phoneNumber": "+1(012)345-6789",
+        "email": "shop@fashionforward.com",
+        "territory_number": 8,
+        "accountManager": "Isabella Martinez"
+    },
+    {
+        "name": "Home Sweet Home Realty",
+        "status": 0,
+        "address": "468 Oak St, Springfield",
+        "distance": "7 miles",
+        "phoneNumber": "+1(123)456-7890",
+        "email": "info@homesweethome.com",
+        "territory_number": 9,
+        "accountManager": "Jack Taylor"
+    },
+    {
+        "name": "Creative Arts Studio",
+        "status": 1,
+        "address": "579 Pine St, Springfield",
+        "distance": "2 miles",
+        "phoneNumber": "+1(234)567-8901",
+        "email": "hello@creativearts.com",
+        "territory_number": 2,
+        "accountManager": "Kate Johnson"
+    },
+    {
+        "name": "Luxury Auto Sales",
+        "status": 1,
+        "address": "680 Cedar St, Springfield",
+        "distance": "5 miles",
+        "phoneNumber": "+1(345)678-9012",
+        "email": "sales@luxuryautos.com",
+        "territory_number": 3,
+        "accountManager": "Liam Davis"
+    },
+    {
+        "name": "Culinary Delights",
+        "status": 0,
+        "address": "791 Birch St, Springfield",
+        "distance": "6 miles",
+        "phoneNumber": "+1(456)789-0123",
+        "email": "info@culinarydelights.com",
+        "territory_number": 1,
+        "accountManager": "Mia Wilson"
+    },
+    {
+        "name": "Bright Futures Academy",
+        "status": 1,
+        "address": "802 Walnut St, Springfield",
+        "distance": "4 miles",
+        "phoneNumber": "+1(567)890-1234",
+        "email": "contact@brightfutures.com",
+        "territory_number": 4,
+        "accountManager": "Noah Anderson"
+    },
+    {
+        "name": "Sports Zone",
+        "status": 1,
+        "address": "913 Elm St, Springfield",
+        "distance": "3 miles",
+        "phoneNumber": "+1(678)901-2345",
+        "email": "info@sportszone.com",
+        "territory_number": 5,
+        "accountManager": "Olivia Taylor"
+    },
+    {
+        "name": "Tech Visionaries",
+        "status": 0,
+        "address": "024 Maple St, Springfield",
+        "distance": "7 miles",
+        "phoneNumber": "+1(789)012-3456",
+        "email": "support@techvisionaries.com",
+        "territory_number": 6,
+        "accountManager": "Parker Moore"
+    },
+    {
+        "name": "Petal Pushers Floral",
+        "status": 1,
+        "address": "135 Oak St, Springfield",
+        "distance": "2 miles",
+        "phoneNumber": "+1(890)123-4567",
+        "email": "info@petalpushers.com",
+        "territory_number": 2,
+        "accountManager": "Quinn Martin"
+    }
+]

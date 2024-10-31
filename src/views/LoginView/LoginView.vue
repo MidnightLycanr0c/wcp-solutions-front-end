@@ -8,8 +8,10 @@ const router = useRouter();
 const email         = ref('');
 const password      = ref('');
 
+// TODO(eugene): Refactor the Statuses into State Machine for Predictability
 const is_loading    = ref(false);
 const error_message = ref('');
+const success       = ref(false);
 
 async function handle_login()
 {
@@ -18,20 +20,29 @@ async function handle_login()
 
     try
     {
-        // TODO(eugene): Mock Up Request
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const response = await fetch(`/api/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                email:    email.value,
+                password: password.value
+            })
+        });
 
-        // TODO(eugene): Remove Mock Up Logic
-        if (email.value === 'test@gmail.com' && password.value === 'password')
+        if (response.ok)
         {
-            console.log('Successful Login!');
-
-            // TEMPORARY FUNCTIONALITY TO CHANGE PAGES ON "SUCCESSFUL" LOGIN
-            router.push('/dashboard');
+            const data = await response.json();
+            console.log(data?.message);
+            success.value = true
         }
         else
         {
-            throw new Error('Invalid Email or Password');
+            const error = await response.json();
+            error_message.value = error?.message;
+
+            console.table(error)
         }
     }
     catch (error)
@@ -84,6 +95,10 @@ async function handle_login()
             <p v-if="error_message" class="w-full text-center mt-4 text-red-600 text-sm">
                 {{ error_message }} <br>
                 Try again or Contact Support Team
+            </p>
+
+            <p v-if="success" class="w-full text-center mt-4 text-lime-600 font-bold text-sm">
+                Logged In!
             </p>
         </form>
     </div>
