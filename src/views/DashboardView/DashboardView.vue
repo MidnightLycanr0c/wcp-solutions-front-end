@@ -10,6 +10,7 @@ const userRole = ref<string>('salesperson'); // change this to 'admin' or 'sales
 // styling
 const CHECK_MARK = '\u2714'; // Unicode for ✔
 const CROSS_MARK = '\u2716'; // Unicode for ✖
+const visibleCount = ref<number>(2);
 
 interface SearchResult {
     name: string;
@@ -42,23 +43,22 @@ const showAcountManagerColumn = computed(() => {
 });
 
 //  sorts result by closest distance
-const parseDistance = (distance: string): number => {
-    const match = distance.match(/(\d+)\s*(miles?|km)/);
-    if (match) {
-        const value = parseFloat(match[1]);
-        return value
-    }
-    return Infinity; 
+const parseDistance = (distance: string) => {
+    return parseFloat(distance);
 };
 
 // limits amounts of results to be displayed
-// TODO: len(result) -> limit, add "see more" button
 // TODO: fix styling break when there are more than 2 results
 const limitedItems = computed(() => {
     return items.value
         .sort((a, b) => parseDistance(a.distance) - parseDistance(b.distance)) // Sort by distance
-        .slice(0, 2); // Limit to 2 results
+        .slice(0, visibleCount.value); // Limited results
 });
+
+// Method to load more items
+const loadMoreItems = () => {
+    visibleCount.value += 2; // Increase the visible count by 2
+};
 
 </script>
 
@@ -158,6 +158,11 @@ const limitedItems = computed(() => {
                         </tr>
                     </tbody>
                 </table>
+                <div class="flex justify-center">
+                    <button v-if="limitedItems.length < items.length"  @click="loadMoreItems" class="mt-4 bg-black text-white py-2 px-4 rounded">
+                        See More
+                    </button>
+                </div>
             </div>
 
             <div class="bg-white rounded-lg shadow-lg p-5">
