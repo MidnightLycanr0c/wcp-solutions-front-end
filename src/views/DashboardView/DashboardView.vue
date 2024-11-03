@@ -80,14 +80,15 @@ const handleFilterToggle = () => {
 
     </div>
 
-    <div class="flex w-full h-screen mt-5">
-        <div class="flex-1 p-5">
+    <div class="flex w-full min-h-screen mt-5 flex-col lg:flex-row">
+        <div class="flex-1 p-3 lg:p-5">
 
             <!-- RESULTS COMPONENT -->
-            <div class="bg-white rounded-lg shadow-lg mb-5 p-5">
-                <h2 class="font-bold mb-2">Search Results</h2>
+            <div class="bg-white rounded-lg shadow-lg mb-5 p-3 lg:p-5">
+                <h2 class="font-bold mb-2 text-lg lg:text-xl">Search Results</h2>
+                <div class="overflow-x-auto">
                 <table class="min-w-full border-b border-gray-300">
-                    <thead>
+                    <thead class="hidden lg:table-header-group">
                         <tr>
                             <th class="px-4 py-2 text-left">Active</th>
                             <th class="px-4 py-2 text-left">Company Name</th>
@@ -100,8 +101,9 @@ const handleFilterToggle = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(result, index) in limitedItems" :key="index">
-                            <td class="px-4 py-2 border-b border-gray-300">
+                        <tr v-for="(result, index) in limitedItems" :key="index" class="border-b border-gray-300 lg:table-row flex flex-col lg:flex-row mb-4 lg:mb-0">
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Active</span>
                                 <span v-if="result.status === 1" class="inline-block w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
                                     {{ CHECK_MARK }}
                                 </span>
@@ -109,23 +111,45 @@ const handleFilterToggle = () => {
                                     {{ CROSS_MARK }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.name }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.address }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.distance }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.phoneNumber }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.email }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.territory_number }}</td>
-                            <td v-if="showAcountManagerColumn" class="px-4 py-2 border-b border-gray-300">{{ result.accountManager }}</td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Company Name</span>
+                                {{ result.name }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Address</span>
+                                {{ result.address }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Distance </span>
+                                {{ result.distance }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Phone Number </span>
+                                {{ result.phoneNumber }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Email </span>
+                                {{ result.email }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Territory Number </span>
+                                {{ result.territory_number }}
+                            </td>
+                            <td v-if="showAcountManagerColumn" class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Account Manager</span>
+                                {{ result.accountManager }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="flex justify-center">
-                    <button v-if="limitedItems.length < items.length"  @click="loadMoreItems" class="mt-4 bg-black text-white py-2 px-4 rounded">
-                        See More
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button v-if="limitedItems.length < items.length" @click="loadMoreItems" class="bg-black text-white py-2 px-4 rounded">
+                      See More
                     </button>
                 </div>
             </div>
-
+            
             <!-- MAP COMPONENT -->
             <div class="bg-white rounded-lg shadow-lg p-5">
                 <h2 class="font-bold mb-2">Map</h2>
