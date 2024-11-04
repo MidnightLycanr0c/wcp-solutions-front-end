@@ -6,6 +6,11 @@ const emit = defineEmits();
 const toggleFilter = () => {
     emit('toggleFilter');
 };
+
+const recentViews = () => {
+    emit('recentViews');
+};
+
 </script>
 
 <template>
@@ -23,7 +28,25 @@ const toggleFilter = () => {
             </form>
             
             <div class="flex items-center justify-end">
-            <!-- Inserting user account icon using Heroicons-->
+                <!-- Icon for recent customers viewed -->
+                <svg
+                    @click="recentViews"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-10 h-10 text-black"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3A9 9 0 1 1 3 12 9 9 0 0 1 21 12z"
+                    />
+                </svg>
+                
+                <!-- Inserting user account icon using Heroicons-->
                 <RouterLink to="/account" class="ml-4">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

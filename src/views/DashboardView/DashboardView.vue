@@ -1,28 +1,21 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { GoogleMap } from '@/components';
+import { SearchResult } from '@/types/interfaces';
+import { CHECK_MARK, CROSS_MARK } from '@/types/styling';
+
 import FilterView from './FilterView.vue';
 import SearchView from './SearchView.vue';
+import RecentView from './RecentView.vue';
 
 const items = ref<SearchResult[]>([]);
 const userRole = ref<string>('salesperson'); // change this to 'admin' or 'salesperson' to test
 
 // styling
-const CHECK_MARK = '\u2714'; // Unicode for ✔
-const CROSS_MARK = '\u2716'; // Unicode for ✖
 const visibleCount = ref<number>(2);
 const isFilterVisible = ref(true);
+const isRecentVisible = ref(false);
 
-interface SearchResult {
-    name: string;
-    status: number,
-    address: string;
-    distance: string;
-    phoneNumber: string;
-    email: string;
-    territory_number: number;
-    accountManager?: string; //  optional
-}
 
 // mock API call
 onMounted(async () => {
@@ -49,7 +42,6 @@ const parseDistance = (distance: string) => {
 };
 
 // limits amounts of results to be displayed
-// TODO: fix styling break 
 const limitedItems = computed(() => {
     return items.value
         .sort((a, b) => parseDistance(a.distance) - parseDistance(b.distance)) // Sort by distance
@@ -66,6 +58,16 @@ const handleFilterToggle = () => {
     isFilterVisible.value = !isFilterVisible.value; 
 };
 
+// open recent views
+const openRecentViews = () => {
+    isRecentVisible.value = true;
+};
+
+// close recent views
+const closeRecentViews = () => {
+    isRecentVisible.value = false;
+};
+
 </script>
 
 <template>
@@ -73,11 +75,16 @@ const handleFilterToggle = () => {
     <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
 
         <!-- Search view component--> 
-        <SearchView @toggleFilter="handleFilterToggle"/>        
+        <SearchView @toggleFilter="handleFilterToggle" @recentViews="openRecentViews"/>        
 
         <!-- Filter view component-->
         <FilterView v-if="isFilterVisible"/>          
 
+    </div>
+
+    <div v-if="isRecentVisible" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <!-- This component will later store recent customers user has viewed -->
+        <RecentView :items="limitedItems" @closeRecentViews="closeRecentViews"  />
     </div>
 
     <div class="flex w-full min-h-screen mt-5 flex-col lg:flex-row">
