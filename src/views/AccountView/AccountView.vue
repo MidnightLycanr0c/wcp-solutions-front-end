@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Account } from './account.interface';
-import { useRouter } from 'vue-router';
+
 
 // TODO(eugene): Add Fetch User Information Functionality
 const account = ref<Account>({
