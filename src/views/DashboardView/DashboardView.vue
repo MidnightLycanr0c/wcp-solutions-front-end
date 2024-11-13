@@ -104,6 +104,7 @@ const closeRecentViews = () => {
                             <th class="px-4 py-2 text-left">Phone Number</th>
                             <th class="px-4 py-2 text-left">Email</th>
                             <th class="px-4 py-2 text-left">Territory Number</th>
+                            <th class="px-4 py-2 text-left"></th>
                             <th v-if="showAcountManagerColumn" class="px-4 py-2 text-left">Account Manager</th>
                         </tr>
                     </thead>
@@ -141,6 +142,21 @@ const closeRecentViews = () => {
                             <td class="px-4 py-2 lg:border-none flex lg:table-cell">
                                 <span class="block font-semibold lg:hidden mr-2">Territory Number </span>
                                 {{ result.territory_number }}
+                            </td>
+                            <td class="px-2 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Buttons</span>
+                                <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                                    <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" />
+                                    </svg>
+                                    View Client
+                                </a>
+                                <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                                    <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8.157 2.176a1.5 1.5 0 0 0-1.147 0l-4.084 1.69A1.5 1.5 0 0 0 2 5.25v10.877a1.5 1.5 0 0 0 2.074 1.386l3.51-1.452 4.26 1.762a1.5 1.5 0 0 0 1.146 0l4.083-1.69A1.5 1.5 0 0 0 18 14.75V3.872a1.5 1.5 0 0 0-2.073-1.386l-3.51 1.452-4.26-1.762ZM7.58 5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 7.58 5Zm5.59 2.75a.75.75 0 0 0-1.5 0v6.5a.75.75 0 0 0 1.5 0v-6.5Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Directions
+                                </a>
                             </td>
                             <td v-if="showAcountManagerColumn" class="px-4 py-2 lg:border-none flex lg:table-cell">
                                 <span class="block font-semibold lg:hidden mr-2">Account Manager</span>
