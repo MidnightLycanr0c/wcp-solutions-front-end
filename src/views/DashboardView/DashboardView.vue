@@ -7,9 +7,11 @@ import { CHECK_MARK, CROSS_MARK } from '@/types/styling';
 import FilterView from './FilterView.vue';
 import SearchView from './SearchView.vue';
 import RecentView from './RecentView.vue';
+import ClientInfoView from '../AccountView/ClientInfoView.vue';
 
 const items = ref<SearchResult[]>([]);
 const userRole = ref<string>('salesperson'); // change this to 'admin' or 'salesperson' to test
+const selectedClient = ref<SearchResult | null>(null);  //New state for selected client
 
 // styling
 const visibleCount = ref<number>(2);
@@ -68,6 +70,16 @@ const closeRecentViews = () => {
     isRecentVisible.value = false;
 };
 
+//Open client view when clicked on a client
+const openClientView = (client: SearchResult) =>{
+    selectedClient.value = client;
+};
+
+//close client view
+const closeClientView = () =>{
+    selectedClient.value = null;
+}
+
 </script>
 
 <template>
@@ -86,6 +98,8 @@ const closeRecentViews = () => {
         <!-- This component will later store recent customers user has viewed -->
         <RecentView :items="limitedItems" @closeRecentViews="closeRecentViews"  />
     </div>
+
+    <ClientInfoView v-if="selectedClient" :client="selectedClient" @close="closeClientView"/>
 
     <div class="flex w-full min-h-screen mt-5 flex-col lg:flex-row">
         <div class="flex-1 p-3 lg:p-5">
@@ -120,7 +134,7 @@ const closeRecentViews = () => {
                             </td>
                             <td class="px-4 py-2 lg:border-none flex lg:table-cell">
                                 <span class="block font-semibold lg:hidden mr-2">Company Name</span>
-                                <button @click="" class="transition duration-300 transform hover:scale-105 hover:bg-gray-200 p-1 rounded">
+                                <button @click="openClientView(result)" class="transition duration-300 transform hover:scale-105 hover:bg-gray-200 p-1 rounded">
                                     {{ result.name }}
                                 </button>
                             </td>
