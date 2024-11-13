@@ -120,7 +120,9 @@ const closeRecentViews = () => {
                             </td>
                             <td class="px-4 py-2 lg:border-none flex lg:table-cell">
                                 <span class="block font-semibold lg:hidden mr-2">Company Name</span>
-                                {{ result.name }}
+                                <button @click="" class="transition duration-300 transform hover:scale-105 hover:bg-gray-200 p-1 rounded">
+                                    {{ result.name }}
+                                </button>
                             </td>
                             <td class="px-4 py-2 lg:border-none flex lg:table-cell">
                                 <span class="block font-semibold lg:hidden mr-2">Address</span>
