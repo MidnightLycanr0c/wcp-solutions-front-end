@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue';
+import { ref } from 'vue';
 
 const emit = defineEmits();
+const searchInput = ref('');
 
 const toggleFilter = () => {
     emit('toggleFilter');
@@ -9,6 +11,10 @@ const toggleFilter = () => {
 
 const recentViews = () => {
     emit('recentViews');
+};
+
+const search = () => {
+    emit('search', searchInput.value);
 };
 
 </script>
@@ -20,9 +26,9 @@ const recentViews = () => {
             <svg @click="toggleFilter" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
-            <form class="flex search-form w-3/4">
-                <input type="text" @input="" placeholder="Search customers by name or keyword" name="search" class="flex-1 p-2 border border-gray-300 rounded-l-md"/>
-                <button type="submit" @submit="" class="bg-black text-white border border-black px-4 py-2 rounded-r-md">
+            <form @submit.prevent="search" class="flex search-form w-3/4">
+                <input type="text" v-model="searchInput" placeholder="Search customers by name or keyword" name="search" class="flex-1 p-2 border border-gray-300 rounded-l-md"/>
+                <button type="submit" @submit="search" class="bg-black text-white border border-black px-4 py-2 rounded-r-md">
                     Search
                 </button>
             </form>

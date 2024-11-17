@@ -9,7 +9,8 @@ import SearchView from './SearchView.vue';
 import RecentView from './RecentView.vue';
 
 const items = ref<SearchResult[]>([]);
-const userRole = ref<string>('salesperson'); // change this to 'admin' or 'salesperson' to test
+const userRole = ref<string>('admin'); // change this to 'admin' or 'salesperson' to test
+const searchTerm = ref<string>('');
 
 // styling
 const visibleCount = ref<number>(2);
@@ -43,7 +44,7 @@ const parseDistance = (distance: string) => {
 
 // limits amounts of results to be displayed
 const limitedItems = computed(() => {
-    return items.value
+    return filteredItems.value
         .sort((a, b) => parseDistance(a.distance) - parseDistance(b.distance)) // Sort by distance
         .slice(0, visibleCount.value); // Limited results
 });
@@ -68,6 +69,20 @@ const closeRecentViews = () => {
     isRecentVisible.value = false;
 };
 
+// filter items
+const filteredItems = computed(() => {
+    const lowerSearchTerm = searchTerm.value.toLowerCase();
+    return items.value.filter(item => 
+        item.name.toLowerCase().includes(lowerSearchTerm) || 
+        item.email.toLowerCase().includes(lowerSearchTerm)
+    );
+});
+
+// handle search
+const handleSearch = (search: string) => {
+    searchTerm.value = search;
+};
+
 </script>
 
 <template>
@@ -75,7 +90,7 @@ const closeRecentViews = () => {
     <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
 
         <!-- Search view component--> 
-        <SearchView @toggleFilter="handleFilterToggle" @recentViews="openRecentViews"/>        
+        <SearchView @toggleFilter="handleFilterToggle" @recentViews="openRecentViews" @search="handleSearch"/>        
 
         <!-- Filter view component-->
         <FilterView v-if="isFilterVisible"/>          
@@ -144,7 +159,7 @@ const closeRecentViews = () => {
                                 {{ result.territory_number }}
                             </td>
                             <td class="px-2 py-2 lg:border-none flex lg:table-cell">
-                                <span class="block font-semibold lg:hidden mr-2">Buttons</span>
+                                <span class="block font-semibold lg:hidden mr-2"></span>
                                 <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
                                     <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" />
@@ -173,7 +188,7 @@ const closeRecentViews = () => {
                 </table>
                 </div>
                 <div class="flex justify-center mt-4">
-                    <button v-if="limitedItems.length < items.length" @click="loadMoreItems" class="bg-black text-white py-2 px-4 rounded">
+                    <button v-if="limitedItems.length < filteredItems.length" @click="loadMoreItems" class="bg-black text-white py-2 px-4 rounded">
                       See More
                     </button>
                 </div>
@@ -182,7 +197,7 @@ const closeRecentViews = () => {
             <!-- MAP COMPONENT -->
             <div class="bg-white rounded-lg shadow-lg p-5">
                 <h2 class="font-bold mb-2">Map</h2>
-                <GoogleMap :items="items" />
+                <GoogleMap :items="filteredItems" />
             </div>
 
         </div>
