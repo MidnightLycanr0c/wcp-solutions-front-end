@@ -1,26 +1,21 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { GoogleMap } from '@/components';
-import FilterView from './FilterView.vue';
+import { SearchResult } from '@/types/interfaces';
+import { CHECK_MARK, CROSS_MARK } from '@/types/styling';
 
+import FilterView from './FilterView.vue';
+import SearchView from './SearchView.vue';
+import RecentView from './RecentView.vue';
 
 const items = ref<SearchResult[]>([]);
 const userRole = ref<string>('salesperson'); // change this to 'admin' or 'salesperson' to test
 
 // styling
-const CHECK_MARK = '\u2714'; // Unicode for ✔
-const CROSS_MARK = '\u2716'; // Unicode for ✖
+const visibleCount = ref<number>(2);
+const isFilterVisible = ref(true);
+const isRecentVisible = ref(false);
 
-interface SearchResult {
-    name: string;
-    status: number,
-    address: string;
-    distance: string;
-    phoneNumber: string;
-    email: string;
-    territory_number: number;
-    accountManager?: string; //  optional
-}
 
 // mock API call
 onMounted(async () => {
@@ -42,91 +37,65 @@ const showAcountManagerColumn = computed(() => {
 });
 
 //  sorts result by closest distance
-const parseDistance = (distance: string): number => {
-    const match = distance.match(/(\d+)\s*(miles?|km)/);
-    if (match) {
-        const value = parseFloat(match[1]);
-        return value
-    }
-    return Infinity; 
+const parseDistance = (distance: string) => {
+    return parseFloat(distance);
 };
 
 // limits amounts of results to be displayed
-// TODO: len(result) -> limit, add "see more" button
-// TODO: fix styling break when there are more than 2 results
 const limitedItems = computed(() => {
     return items.value
         .sort((a, b) => parseDistance(a.distance) - parseDistance(b.distance)) // Sort by distance
-        .slice(0, 2); // Limit to 2 results
+        .slice(0, visibleCount.value); // Limited results
 });
+
+// Method to load more items
+const loadMoreItems = () => {
+    visibleCount.value += 2; // Increase the visible count by 2
+};
+
+// toggle filters
+const handleFilterToggle = () => {
+    isFilterVisible.value = !isFilterVisible.value; 
+};
+
+// open recent views
+const openRecentViews = () => {
+    isRecentVisible.value = true;
+};
+
+// close recent views
+const closeRecentViews = () => {
+    isRecentVisible.value = false;
+};
 
 </script>
 
 <template>
+    
     <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
-        <div class = "flex items-center justify-between">
-            
-        <!-- Filter icon for search bar -->
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-        </svg>
-        <form class="flex search-form w-3/4">
-            <input type="text" placeholder="Search customers by name or keyword" name="search" class="flex-1 p-2 border border-gray-300 rounded-l-md"/>
-            <button type="submit" class="bg-black text-white border border-black px-4 py-2 rounded-r-md">
-                Search
-            </button>
-        </form>
-        
-        <!-- Inserting user account icon using Heroicons-->
-        <RouterLink to="/account" class="ml-4">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-10 h-10 text-black"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-            </svg>
-        </RouterLink>
 
-        <!-- Inserting logout icon using Heroicons-->
-        <!-- TODO: WE PROBABLY WANT TO MOVE THIS ICON TO THE HEADER-->
-        <RouterLink to="/" class="ml-4">
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke-width="1.5" 
-                stroke="#de1a34" 
-                class="w-10 h-10 text-black">
-                <path 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" 
-                />
-            </svg>
-        </RouterLink>
-        </div>
+        <!-- Search view component--> 
+        <SearchView @toggleFilter="handleFilterToggle" @recentViews="openRecentViews"/>        
+
+        <!-- Filter view component-->
+        <FilterView v-if="isFilterVisible"/>          
 
     </div>
 
-    <div class="flex w-full h-screen mt-5">
-        <div class="bg-white rounded-lg shadow-lg p-5 w-1/4">
-            <FilterView/>
-        </div>
+    <div v-if="isRecentVisible" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <!-- This component will later store recent customers user has viewed -->
+        <RecentView :items="limitedItems" @closeRecentViews="closeRecentViews"  />
+    </div>
 
-        <div class="flex-1 p-5">
-            <div class="bg-white rounded-lg shadow-lg mb-5 p-5">
-                <h2 class="font-bold mb-2">Search Results</h2>
+    <div class="flex w-full min-h-screen mt-5 flex-col lg:flex-row">
+        <div class="flex-1 p-3 lg:p-5">
+
+            <!-- RESULTS COMPONENT -->
+            <div class="bg-white rounded-lg shadow-lg mb-5 p-3 lg:p-5">
+                <h2 class="font-bold mb-2 text-lg lg:text-xl">Search Results</h2>
+                <div class="overflow-x-auto">
                 <table class="min-w-full border-b border-gray-300">
-                    <thead>
+                    <thead class="hidden lg:table-header-group">
                         <tr>
                             <th class="px-4 py-2 text-left">Active</th>
                             <th class="px-4 py-2 text-left">Company Name</th>
@@ -135,12 +104,14 @@ const limitedItems = computed(() => {
                             <th class="px-4 py-2 text-left">Phone Number</th>
                             <th class="px-4 py-2 text-left">Email</th>
                             <th class="px-4 py-2 text-left">Territory Number</th>
+                            <th class="px-4 py-2 text-left"></th>
                             <th v-if="showAcountManagerColumn" class="px-4 py-2 text-left">Account Manager</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(result, index) in limitedItems" :key="index">
-                            <td class="px-4 py-2 border-b border-gray-300">
+                        <tr v-for="(result, index) in limitedItems" :key="index" class="border-b border-gray-300 lg:table-row flex flex-col lg:flex-row mb-4 lg:mb-0">
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Active</span>
                                 <span v-if="result.status === 1" class="inline-block w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
                                     {{ CHECK_MARK }}
                                 </span>
@@ -148,22 +119,73 @@ const limitedItems = computed(() => {
                                     {{ CROSS_MARK }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.name }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.address }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.distance }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.phoneNumber }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.email }}</td>
-                            <td class="px-4 py-2 border-b border-gray-300">{{ result.territory_number }}</td>
-                            <td v-if="showAcountManagerColumn" class="px-4 py-2 border-b border-gray-300">{{ result.accountManager }}</td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Company Name</span>
+                                {{ result.name }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Address</span>
+                                {{ result.address }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Distance </span>
+                                {{ result.distance }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Phone Number </span>
+                                {{ result.phoneNumber }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Email </span>
+                                {{ result.email }}
+                            </td>
+                            <td class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Territory Number </span>
+                                {{ result.territory_number }}
+                            </td>
+                            <td class="px-2 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Buttons</span>
+                                <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                                    <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" />
+                                    </svg>
+                                    View Client
+                                </a>
+                                <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                                    <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8.157 2.176a1.5 1.5 0 0 0-1.147 0l-4.084 1.69A1.5 1.5 0 0 0 2 5.25v10.877a1.5 1.5 0 0 0 2.074 1.386l3.51-1.452 4.26 1.762a1.5 1.5 0 0 0 1.146 0l4.083-1.69A1.5 1.5 0 0 0 18 14.75V3.872a1.5 1.5 0 0 0-2.073-1.386l-3.51 1.452-4.26-1.762ZM7.58 5a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 7.58 5Zm5.59 2.75a.75.75 0 0 0-1.5 0v6.5a.75.75 0 0 0 1.5 0v-6.5Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Directions
+                                </a>
+                                <a href="/dashboard" class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500 ">
+                                    <svg class="w-3.5 h-3.5 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Call
+                                </a>
+                            </td>
+                            <td v-if="showAcountManagerColumn" class="px-4 py-2 lg:border-none flex lg:table-cell">
+                                <span class="block font-semibold lg:hidden mr-2">Account Manager</span>
+                                {{ result.accountManager }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button v-if="limitedItems.length < items.length" @click="loadMoreItems" class="bg-black text-white py-2 px-4 rounded">
+                      See More
+                    </button>
+                </div>
             </div>
-
+            
+            <!-- MAP COMPONENT -->
             <div class="bg-white rounded-lg shadow-lg p-5">
                 <h2 class="font-bold mb-2">Map</h2>
                 <GoogleMap />
             </div>
+
         </div>
     </div>
+
 </template>
