@@ -182,7 +182,7 @@ const closeRecentViews = () => {
             <!-- MAP COMPONENT -->
             <div class="bg-white rounded-lg shadow-lg p-5">
                 <h2 class="font-bold mb-2">Map</h2>
-                <GoogleMap />
+                <GoogleMap :items="items" />
             </div>
 
         </div>

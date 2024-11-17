@@ -7,4 +7,6 @@ export interface SearchResult {
     email: string;
     territory_number: number;
     accountManager?: string;
+    latitude: number;
+    longitude: number;
 }
