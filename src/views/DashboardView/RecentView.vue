@@ -5,6 +5,7 @@ import { CHECK_MARK, CROSS_MARK } from '@/types/styling';
 // Define props and emits
 const { items } = defineProps<{
     items: SearchResult[];
+    fromGoogleMaps: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -20,7 +21,9 @@ const emit = defineEmits<{
                 Close
             </button>
 
-            <h2 class="text-2xl font-semibold mb-4">Recently Viewed</h2>
+            <h2 class="text-2xl font-semibold mb-4">
+                {{ fromGoogleMaps ? items[0]?.name : 'Recently Viewed' }}
+            </h2>
 
             <div class="grid grid-cols-1 gap-4">
                 <div v-for="item in items" :key="item.name" class="border border-gray-300 p-4 rounded-lg shadow-sm">

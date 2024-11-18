@@ -1,15 +1,21 @@
 <template>
     <div ref="map" class="w-full h-80" id="map"></div>
+    <div v-if="selectedItem.length" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <RecentView :items="selectedItem" @closeRecentViews="closeCustomerCard" :fromGoogleMaps="fromGoogleMaps"/>  <!-- temporary usage of this template -->
+    </div>
 </template>
   
 <script setup lang="ts">
 import { ref, onMounted, defineProps } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
 import { SearchResult } from "@/types/interfaces";
+import RecentView from '../views/DashboardView/RecentView.vue';  
 
 // Types for map and markers
 let map: google.maps.Map;
 const markers = ref<google.maps.marker.AdvancedMarkerElement[]>([]);
+const selectedItem = ref<SearchResult[]>([]); 
+const fromGoogleMaps = ref(false);
 
 const map_options: google.maps.MapOptions = {
     center: { lat: 37.7749, lng: -122.4194 },
@@ -46,6 +52,12 @@ onMounted(async () => {
                 title: item.name,
             });
 
+            // Add click listener to each marker
+            marker.addListener("click", () => {
+                selectedItem.value.push(item);
+                fromGoogleMaps.value = true;
+            });
+
             markers.value.push(marker);
         });
         if (items.length > 0) {
@@ -57,10 +69,14 @@ onMounted(async () => {
             });
             map.fitBounds(bounds);
         }
-
+  
     } catch (error) {
         console.error("Error loading Google Maps: ", error);
     }
 });
 
+// close customer card
+const closeCustomerCard = () => {
+    selectedItem.value = [];
+};
 </script>
