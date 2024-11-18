@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue';
 
-const emit = defineEmits(['filterSelected']); // Emit event for filter selection
+const emit = defineEmits();
 const selectedFilters = ref<{ [key: string]: string }>({}); // Reactive state to keep track of selected filters
 
 const filters: [string, string[]][] = [
