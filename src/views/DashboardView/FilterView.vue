@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue';
 
-const emit = defineEmits(['filterSelected']); // Emit event for filter selection
+const emit = defineEmits();
 const selectedFilters = ref<{ [key: string]: string }>({}); // Reactive state to keep track of selected filters
 
 const filters: [string, string[]][] = [
     ['Status', ['Active', 'Suspended']],
-    ['Territory', ['1', '2', '3']],
+    ['Within Your Territory', ['Yes', 'No']],
+    ['Company Size', ['Small', 'Medium', 'Large']],
+    ['Industry', ['Technology', 'Health Care', 'Education', 'Finance', 'Mangufactoring', 'Food Service']],
+    ['Revenue', ['$0 - $100K', '$100k - $500k', '$500k - $1M', '$1M+']],
+    ['Customer Class', ['1','2','3','4']], //numbers so far becasue unclear about what the values represent from data base
 ];
 
 // Handle filter selection
@@ -34,6 +38,14 @@ const clearFilters = () => {
                         <span>10 mi</span>
                     </div>
                     <span class="text-sm">Distance</span>
+                </div>
+                <div class="w-full relative">
+                    <input type="range" min="0" max="12" step="1" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer">  
+                    <div class="absolute -top-2 left-0 right-0 flex justify-between text-xs text-gray-600"> 
+                        <span>0 months</span>
+                        <span>12 months</span>
+                    </div>
+                    <span class="text-sm">Last Order</span>
                 </div>
             </div>
             <div v-for="(filter, index) in filters" :key="index" class="filter-group mb-2">

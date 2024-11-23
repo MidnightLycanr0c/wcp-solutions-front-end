@@ -1,4 +1,6 @@
 <script>
+    
+
     const ClientName = "Name";
     const Address = "123 Example ST, Sacramento, CA 95822";
     const Contact = "Contact Name";

@@ -21,7 +21,6 @@ FROM base AS development
 WORKDIR /usr/src/app
 
 COPY ./ ./
-COPY package.json ./
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
 
 
