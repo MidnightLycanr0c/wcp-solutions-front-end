@@ -8,7 +8,6 @@ import {
     ClientDetails,
 
 } from '@/views';
-import { defineComponent } from 'vue';
 
 
 const routes = [
