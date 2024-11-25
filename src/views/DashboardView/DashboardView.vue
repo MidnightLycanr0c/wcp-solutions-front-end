@@ -20,16 +20,223 @@ const isRecentVisible = ref(false);
 
 // mock API call
 onMounted(async () => {
-    try {
-        const response = await fetch('src/views/DashboardView/search_result_mockup.json');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+    // TODO(eugene): remove prep for demo; Vite ignores local files with data
+    // try {
+    //     const response = await fetch('src/views/DashboardView/search_result_mockup.json');
+    //     if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //     }
+    //     items.value = await response.json();
+    // } catch (error) {
+    //     console.error('Error fetching search results:', error);
+    //     items.value = [];
+    // }
+    items.value = [
+        {
+            "name": "John Doe Inc",
+            "status": 1,
+            "address": "123 Elm St, Springfield",
+            "distance": "5 miles",
+            "phoneNumber": "+1(234)567-8901",
+            "email": "johndoe@example.com",
+            "territory_number": 5,
+            "accountManager": "Alice Johnson",
+            "latitude": 39.8132,
+            "longitude": -89.6173
+        },
+        {
+            "name": "Juicy Fruit Co.",
+            "status": 0,
+            "address": "456 Oak St, Springfield",
+            "distance": "3 miles",
+            "phoneNumber": "+1(345)678-9012",
+            "email": "janesmith@example.com",
+            "territory_number": 2,
+            "accountManager": "Bob Brown",
+            "latitude": 39.7621,
+            "longitude": -89.6425
+        },
+        {
+            "name": "Tech Innovations LLC",
+            "status": 1,
+            "address": "789 Maple Ave, Springfield",
+            "distance": "1.5 miles",
+            "phoneNumber": "+1(456)789-0123",
+            "email": "contact@techinnovations.com",
+            "territory_number": 3,
+            "accountManager": "Clara Smith",
+            "latitude": 39.8076,
+            "longitude": -89.6634
+        },
+        {
+            "name": "Green Thumb Gardening",
+            "status": 0,
+            "address": "321 Pine St, Springfield",
+            "distance": "2 miles",
+            "phoneNumber": "+1(567)890-1234",
+            "email": "info@greenthumb.com",
+            "territory_number": 1,
+            "accountManager": "David White",
+            "latitude": 39.7548,
+            "longitude": -89.6748
+        },
+        {
+            "name": "Gourmet Bistro",
+            "status": 1,
+            "address": "654 Cedar St, Springfield",
+            "distance": "4 miles",
+            "phoneNumber": "+1(678)901-2345",
+            "email": "hello@gourmetbistro.com",
+            "territory_number": 4,
+            "accountManager": "Eva Green",
+            "latitude": 39.7732,
+            "longitude": -89.5957
+        },
+        {
+            "name": "Fitness First Gym",
+            "status": 1,
+            "address": "987 Birch St, Springfield",
+            "distance": "2.5 miles",
+            "phoneNumber": "+1(789)012-3456",
+            "email": "info@fitnessfirst.com",
+            "territory_number": 6,
+            "accountManager": "Frank Wright",
+            "latitude": 39.7986,
+            "longitude": -89.6289
+        },
+        {
+            "name": "Pet Paradise",
+            "status": 0,
+            "address": "135 Walnut St, Springfield",
+            "distance": "6 miles",
+            "phoneNumber": "+1(890)123-4567",
+            "email": "contact@petparadise.com",
+            "territory_number": 5,
+            "accountManager": "Grace Lee",
+            "latitude": 39.7193,
+            "longitude": -89.6712
+        },
+        {
+            "name": "Quick Tech Solutions",
+            "status": 1,
+            "address": "246 Elm St, Springfield",
+            "distance": "3.5 miles",
+            "phoneNumber": "+1(901)234-5678",
+            "email": "support@quicktech.com",
+            "territory_number": 7,
+            "accountManager": "Henry Adams",
+            "latitude": 39.7919,
+            "longitude": -89.6533
+        },
+        {
+            "name": "Fashion Forward Boutique",
+            "status": 1,
+            "address": "357 Maple St, Springfield",
+            "distance": "4.5 miles",
+            "phoneNumber": "+1(012)345-6789",
+            "email": "shop@fashionforward.com",
+            "territory_number": 8,
+            "accountManager": "Isabella Martinez",
+            "latitude": 39.7865,
+            "longitude": -89.6052
+        },
+        {
+            "name": "Home Sweet Home Realty",
+            "status": 0,
+            "address": "468 Oak St, Springfield",
+            "distance": "7 miles",
+            "phoneNumber": "+1(123)456-7890",
+            "email": "info@homesweethome.com",
+            "territory_number": 9,
+            "accountManager": "Jack Taylor",
+            "latitude": 39.7104,
+            "longitude": -89.6297
+        },
+        {
+            "name": "Creative Arts Studio",
+            "status": 1,
+            "address": "579 Pine St, Springfield",
+            "distance": "2 miles",
+            "phoneNumber": "+1(234)567-8901",
+            "email": "hello@creativearts.com",
+            "territory_number": 2,
+            "accountManager": "Kate Johnson",
+            "latitude": 39.7981,
+            "longitude": -89.6444
+        },
+        {
+            "name": "Luxury Auto Sales",
+            "status": 1,
+            "address": "680 Cedar St, Springfield",
+            "distance": "5 miles",
+            "phoneNumber": "+1(345)678-9012",
+            "email": "sales@luxuryautos.com",
+            "territory_number": 3,
+            "accountManager": "Liam Davis",
+            "latitude": 39.8124,
+            "longitude": -89.5893
+        },
+        {
+            "name": "Culinary Delights",
+            "status": 0,
+            "address": "791 Birch St, Springfield",
+            "distance": "6 miles",
+            "phoneNumber": "+1(456)789-0123",
+            "email": "info@culinarydelights.com",
+            "territory_number": 1,
+            "accountManager": "Mia Wilson",
+            "latitude": 39.7728,
+            "longitude": -89.6263
+        },
+        {
+            "name": "Bright Futures Academy",
+            "status": 1,
+            "address": "802 Walnut St, Springfield",
+            "distance": "4 miles",
+            "phoneNumber": "+1(567)890-1234",
+            "email": "contact@brightfutures.com",
+            "territory_number": 4,
+            "accountManager": "Noah Anderson",
+            "latitude": 39.7665,
+            "longitude": -89.5828
+        },
+        {
+            "name": "Sports Zone",
+            "status": 1,
+            "address": "913 Elm St, Springfield",
+            "distance": "3 miles",
+            "phoneNumber": "+1(678)901-2345",
+            "email": "info@sportszone.com",
+            "territory_number": 5,
+            "accountManager": "Olivia Taylor",
+            "latitude": 39.7838,
+            "longitude": -89.6210
+        },
+        {
+            "name": "Tech Visionaries",
+            "status": 0,
+            "address": "024 Maple St, Springfield",
+            "distance": "7 miles",
+            "phoneNumber": "+1(789)012-3456",
+            "email": "support@techvisionaries.com",
+            "territory_number": 6,
+            "accountManager": "Parker Moore",
+            "latitude": 39.7074,
+            "longitude": -89.6632
+        },
+        {
+            "name": "Petal Pushers Floral",
+            "status": 1,
+            "address": "135 Oak St, Springfield",
+            "distance": "2 miles",
+            "phoneNumber": "+1(890)123-4567",
+            "email": "info@petalpushers.com",
+            "territory_number": 2,
+            "accountManager": "Quinn Martin",
+            "latitude": 39.7807,
+            "longitude": -89.6504
         }
-        items.value = await response.json();
-    } catch (error) {
-        console.error('Error fetching search results:', error);
-        items.value = [];
-    }
+    ]
 });
 
 // determine if the accountManager column should be displayed
