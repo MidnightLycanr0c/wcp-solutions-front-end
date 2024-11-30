@@ -1,20 +1,22 @@
 <template>
     <div ref="map" class="w-full h-80" id="map"></div>
-    <div v-if="selectedItem.length" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-        <RecentView :items="selectedItem" @closeRecentViews="closeCustomerCard" :fromGoogleMaps="fromGoogleMaps"/>  <!-- temporary usage of this template -->
+    <div v-if="selectedItem.length"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+        <RecentView :items="selectedItem" @closeRecentViews="closeCustomerCard" :fromGoogleMaps="fromGoogleMaps" />
+        <!-- temporary usage of this template -->
     </div>
 </template>
-  
+
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
 import { SearchResult } from "@/types/interfaces";
-import RecentView from '../views/DashboardView/RecentView.vue';  
+import RecentView from '../views/DashboardView/RecentView.vue';
 
 // Types for map and markers
 let map: google.maps.Map;
 const markers = ref<google.maps.marker.AdvancedMarkerElement[]>([]);
-const selectedItem = ref<SearchResult[]>([]); 
+const selectedItem = ref<SearchResult[]>([]);
 const fromGoogleMaps = ref(false);
 
 const map_options: google.maps.MapOptions = {
@@ -30,7 +32,7 @@ const { items } = defineProps<{
 onMounted(async () => {
 
     const loader = new Loader({
-        apiKey: import.meta.env.VITE_GOOGLE_API_KEY, 
+        apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
         version: "weekly",
         libraries: ["marker"],
     });
@@ -69,7 +71,7 @@ onMounted(async () => {
             });
             map.fitBounds(bounds);
         }
-  
+
     } catch (error) {
         console.error("Error loading Google Maps: ", error);
     }

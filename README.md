@@ -1,4 +1,28 @@
 # WCP Solutions | Front End 
+
+<div align="center">
+  <img src="src/assets/Wcp_WebApp_Image.png" alt="Project Screenshot">
+</div>
+
+
+# About the Project
+This web-based application is deisnged to assist the sales teams at WCP Solutions, Inc. in finding and managing customer information effeciently. The tool allows the users to search for customers and refine the results based on various properties. The filtered results can be viewed in an interactive map view powered by Google Maps. This system aims to streamline customer lookup and enchace the decision-making process for the end users.
+
+## Testing
+
+## Deployment
+
+## Developer Instructions
+
+
+## Techonologies Used
+
+- ![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
+- ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+- ![Google Maps API](https://img.shields.io/badge/Google%20Maps%20API-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white)
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+
 ## Contributors
 - [Anish Mishra](https://github.com/VocalVisage)
 - [Austin Melendez](https://github.com/austin-mel)
