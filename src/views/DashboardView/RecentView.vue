@@ -5,6 +5,7 @@ import { CHECK_MARK, CROSS_MARK } from '@/types/styling';
 // Define props and emits
 const { items } = defineProps<{
     items: SearchResult[];
+    closeRecentViews: Function;
     fromGoogleMaps: boolean;
 }>();
 
